@@ -8,7 +8,6 @@ class ModelTwo extends Component {
     super(props);
 
     this.state = {
-      // form: {
         firstname: "",
         lastname: "",
         dob: "",
@@ -18,20 +17,21 @@ class ModelTwo extends Component {
         facility: "",
         hospise:"yes",
         condition:""
-      // },
-      // formErrors: {
-      //   firstname: null,
-      //   lastname: null,
-      //   dob: null,
-      //   age: null,
-      //   height: null,
-      //   weight: null,
-      //   facility: null,
-      //   hospise:null,
-      //   condition:null
-      // }
+      
     };
   }
+
+  // myChangeHandler = (event) => {
+  //   firstname = event.target.value,
+  //       // lastname: "",
+  //       // dob: "",
+  //       // age: "",
+  //       // height: "",
+  //       // weight: "",
+  //       // facility: "",
+  //       // hospise:"yes",
+  //       // condition:""
+  // }
   
   handleFirstnameChange = (event) => {
     this.setState({
@@ -65,7 +65,7 @@ class ModelTwo extends Component {
                           name="firstname"
                           className="form-control w-100"
                           value={this.state.firstname}
-                          onChange={this.handleFirstnameChange}
+                          onChange={this.myChangeHandler}
                         />
                       </div>
                       <div className="col-6">

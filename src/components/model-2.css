@@ -4,14 +4,19 @@
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .bg-black {
     background-color: rgba(0, 0, 0, 0.315);
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .class-1 {
     padding-top: 2rem;
+}
+
+.errorMsg {
+    color: red;
+    font-size: 12px;
 }
