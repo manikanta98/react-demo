@@ -23,6 +23,15 @@ class ViewPatients extends Component {
             this.setState({ patients: response.data });
           });
       }
+
+      deletePatientClicked(id) {
+        PatientDataService.deletePatient(id).then((response) => {
+          console.log(response);          
+          this.refreshPatients();
+        });
+      }
+    
+
   render() {
     return (
       <>
@@ -30,11 +39,11 @@ class ViewPatients extends Component {
           <div className="container-fluid bg-black">
             <div className="container class-1">
               <div className="col-lg-10 mx-auto">
-                <div className="col-lg-10 mx-auto">
+                <div className="col-lg-12 mx-auto">
                   <div className="card mt-5">
                     <div className="card-header">Add Patient</div>
                     <div className="card-body text-center py-5">
-                      <Table striped bordered hover>
+                      <Table bordered hover variant="dark">
                         <thead>
                           <tr>
                             <th>#</th>
@@ -45,18 +54,21 @@ class ViewPatients extends Component {
                             <th>Height</th>
                             <th>Weight</th>
                             <th>Facility</th>
+                            <th>Delete</th>
                           </tr>
                         </thead>
                         <tbody>
                             {this.state.patients.map((patient)=>(
                           <tr>
                             <td>{patient.id}</td>
-                            <td>{patient.firstname}</td>
-                            <td> {patient.Dob} </td>
+                            <td>{patient.firstName}</td>
+                            <td>{patient.lastName}</td>                            
+                            <td> {patient.dob} </td>
                             <td> {patient.age} </td>
                             <td> {patient.height} </td>
                             <td> {patient.weight} </td>
                             <td> {patient.facility} </td>
+                            <td> <button className="btn btn-warning" onClick={ ()=> this.deletePatientClicked(patient.id) } > Delete </button> </td>
                           </tr>
                             ))}
                           

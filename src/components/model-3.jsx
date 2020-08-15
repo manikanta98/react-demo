@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./model-2.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import PatientDataService from "../services/PatientDataService";
 
 class ModelThree extends Component {
     constructor() {
@@ -130,6 +130,7 @@ class ModelThree extends Component {
           errors: errors
         });
         console.log(fields);
+        PatientDataService.addPatient(fields).then((response)=>{ console.log( "Response :", response); })
         return formIsValid;
   
   
@@ -137,20 +138,10 @@ class ModelThree extends Component {
       onHandleClear = (e)=>  {
         
         let fieldss = {};
-            // fieldss["firstName"] = "";
-            // fieldss["lastName"] = "";
-            // fieldss["dob"] = "";
-            // fieldss["age"] = "";
-            // fieldss["height"] = "";
-            // fieldss["weight"] = "";
-            // fieldss["facility"] = "";
-            // fieldss["hospise"] = "yes";
-            // fieldss["selectMediCondition"] = "none";
             
             this.setState({fields:fieldss});
             this.setState({errors : {}})
-        // return true;
-        // e.preventDefault();
+        
       }
   
   render() {
