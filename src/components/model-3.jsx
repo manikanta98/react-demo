@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import "./model-2.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PatientDataService from "../services/PatientDataService";
+import  { Redirect } from 'react-router-dom'
 
 class ModelThree extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
           fields: {},
           errors: {}
@@ -29,8 +30,8 @@ class ModelThree extends Component {
         e.preventDefault();
         if (this.validateForm()) {
             let fields = {};
-            fields["firstName"] = "";
-            fields["lastName"] = "";
+            fields["first_name"] = "";
+            fields["last_name"] = "";
             fields["dob"] = "";
             fields["age"] = "";
             fields["height"] = "";
@@ -42,8 +43,8 @@ class ModelThree extends Component {
             // fields["selectMediCondition"] = "none";
             
             this.setState({fields:fields});
-            alert("Form submitted");
-            
+            // alert("Form submitted");
+
         }
   
       }
@@ -54,26 +55,26 @@ class ModelThree extends Component {
         let errors = {};
         let formIsValid = true;
   
-        if (!fields["firstName"]) {
+        if (!fields["first_name"]) {
           formIsValid = false;
-          errors["firstName"] = "*Please enter your firstName.";
+          errors["first_name"] = "*Please enter your first_name.";
         }
   
-        if (typeof fields["firstName"] !== "undefined") {
-          if (!fields["firstName"].match(/^[a-zA-Z ]*$/)) {
+        if (typeof fields["first_name"] !== "undefined") {
+          if (!fields["first_name"].match(/^[a-zA-Z ]*$/)) {
             formIsValid = false;
-            errors["firstName"] = "*Please enter alphabet characters only.";
+            errors["first_name"] = "*Please enter alphabet characters only.";
           }
         }
-        if (!fields["lastName"]) {
+        if (!fields["last_name"]) {
             formIsValid = false;
-            errors["lastName"] = "*Please enter your lastName.";
+            errors["last_name"] = "*Please enter your last_name.";
           }
     
-          if (typeof fields["lastName"] !== "undefined") {
-            if (!fields["lastName"].match(/^[a-zA-Z ]*$/)) {
+          if (typeof fields["last_name"] !== "undefined") {
+            if (!fields["last_name"].match(/^[a-zA-Z ]*$/)) {
               formIsValid = false;
-              errors["lastName"] = "*Please enter alphabet characters only.";
+              errors["last_name"] = "*Please enter alphabet characters only.";
             }
           }
     
@@ -130,7 +131,13 @@ class ModelThree extends Component {
           errors: errors
         });
         console.log(fields);
-        PatientDataService.addPatient(fields).then((response)=>{ console.log( "Response :", response); })
+        // <Redirect to='/login'  />
+        
+        PatientDataService.addPatient(fields).then((response)=>{
+          
+          console.log( "Response :", response);
+          this.props.history.push('/viewpatients')
+        })
         return formIsValid;
   
   
@@ -158,26 +165,26 @@ class ModelThree extends Component {
                     <form id="AddPatient"   name="AddPatient" onSubmit= {this.submituserRegistrationForm}>
                     <div className="row">
                       <div className="col-6">
-                        <label htmlFor="firstName" className="lable">First Name </label>
+                        <label htmlFor="first_name" className="lable">First Name </label>
                         <input
                           type="text"
-                          name="firstName"
+                          name="first_name"
                           className="form-control w-100"
-                          value={this.state.fields.firstName}
+                          value={this.state.fields.first_name}
                            onChange={this.handleChange} 
                         />
-                        <div className="errorMsg">{this.state.errors.firstName}</div>
+                        <div className="errorMsg">{this.state.errors.first_name}</div>
                       </div>
                       <div className="col-6">
-                        <label htmlFor="lastName" className="lable" >Last Name </label>
+                        <label htmlFor="last_name" className="lable" >Last Name </label>
                         <input
                           type="text"
-                          name="lastName"
+                          name="last_name"
                           className="form-control w-100"
-                          value={this.state.fields.lastName}
+                          value={this.state.fields.last_name}
                           onChange={this.handleChange} 
                        />
-                       <div className="errorMsg">{this.state.errors.lastName}</div>
+                       <div className="errorMsg">{this.state.errors.last_name}</div>
                       </div>
                     </div>
                     <div className="row pt-3">
@@ -291,7 +298,7 @@ class ModelThree extends Component {
                     <div className="row pt-4 ">
                      <div className="mx-auto">
                      {/* <button type="submit"    className="btn btn-success mr-3">Procced</button> */}
-                     <input type="submit"  className="btn btn-success mr-3" value="Procced" />
+                     <input type="submit"  className="btn btn-success mr-3" value="ADD" />
                      <button type="reset" onClick={this.onHandleClear} className="btn btn-warning">Clear</button>
                      </div>
                     </div>

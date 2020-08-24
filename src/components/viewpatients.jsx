@@ -16,10 +16,9 @@ class ViewPatients extends Component {
         this.refreshPatients();
       }
       refreshPatients() {
-        PatientDataService.getAllPatients('name') //HARDCODED
+        PatientDataService.getAllPatients() 
           .then((response) => {
-            console.log(response);
-            //this.state.courses = response;
+            console.log(response);            
             this.setState({ patients: response.data });
           });
       }
@@ -38,8 +37,8 @@ class ViewPatients extends Component {
         <section className="container-fluid bg-img px-0">
           <div className="container-fluid bg-black">
             <div className="container class-1">
-              <div className="col-lg-10 mx-auto">
-                <div className="col-lg-12 mx-auto">
+              <div className="col-lg-12 mx-auto">
+                <div className="col-lg-12 pb-5 mx-auto">
                   <div className="card mt-5">
                     <div className="card-header">Add Patient</div>
                     <div className="card-body text-center py-5">
@@ -60,20 +59,25 @@ class ViewPatients extends Component {
                         <tbody>
                             {this.state.patients.map((patient)=>(
                           <tr>
-                            <td>{patient.id}</td>
-                            <td>{patient.firstName}</td>
-                            <td>{patient.lastName}</td>                            
+                            <td>{patient.p_id}</td>
+                            <td>{patient.first_name}</td>
+                            <td>{patient.last_name}</td>                            
                             <td> {patient.dob} </td>
                             <td> {patient.age} </td>
                             <td> {patient.height} </td>
                             <td> {patient.weight} </td>
                             <td> {patient.facility} </td>
-                            <td> <button className="btn btn-warning" onClick={ ()=> this.deletePatientClicked(patient.id) } > Delete </button> </td>
+                            <td> <button className="btn btn-warning" onClick={ ()=> this.deletePatientClicked(patient.p_id) } > Delete </button> </td>
                           </tr>
                             ))}
                           
                         </tbody>
                       </Table>
+                              <div className="text-center">
+                                <a href="/addpatient" className="btn btn-success" > Add Patient </a>
+
+                              </div>
+
                     </div>
                   </div>
                 </div>
